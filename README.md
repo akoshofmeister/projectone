@@ -1,10 +1,3 @@
-# projectone
-University project
+This is a university project by Máté Molnár and Ákos Hofmeister for ELTE Faculti Of Informatics.
 
-ELTE Faculty Of Informatics
-
-Application Development Course
-
-by Máté Molnár & Ákos Hofmeister
-
-
+Our project is about ... WHAT???
