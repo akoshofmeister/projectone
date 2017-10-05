@@ -30,3 +30,45 @@ Features
   - delete posts and replies 
   - change room properties
   - remove/ban users
+
+Used frameworks and languages
+---
+- Client
+  - TypeScript
+  - Angular 4 (using Angular CLI)
+- Server
+  - Java
+  - Spring
+
+Dependencies
+---
+- JDK (1.8)
+- Maven (3.5.0)
+- Node 8, NPM 3
+
+To install node dependencies, run `npm install` in the project root.
+
+Commands
+---
+
+Launching the application in development mode:
+```
+npm start
+```
+
+Starting the development server or the client separately:
+```
+npm run start-server
+npm run start-client
+```
+
+Building the application:
+```
+npm run build
+```
+
+Building the server or the client separately:
+```
+npm run build-server
+npm run build-client
+```
