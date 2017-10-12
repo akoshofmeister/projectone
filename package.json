@@ -1,0 +1,28 @@
+{
+  "name": "projectone",
+  "version": "0.0.0",
+  "description": "Project One - University project",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel start-server start-client",
+    "start-server": "cd server && mvn spring-boot:run",
+    "start-client": "npm run --prefix client start",
+    "build": "npm-run-all --parallel build-server build-client",
+    "build-server": "cd server && mvn package",
+    "build-client": "npm run --prefix client build",
+    "postinstall": "npm --prefix client install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akoshofmeister/projectone.git"
+  },
+  "author": "Mate Molnar & Akos Hofmeister",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akoshofmeister/projectone/issues"
+  },
+  "homepage": "https://github.com/akoshofmeister/projectone#readme",
+  "dependencies": {
+    "npm-run-all": "^4.1.1"
+  }
+}
