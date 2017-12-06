@@ -1,0 +1,24 @@
+<div id="room" class="content bg-faded">
+  <div class="roomTitle sticky-top">
+    <h2 class="w-100 bg-faded pb-2 pt-2">Global</h2>
+  </div>
+  <div *ngFor="let msg of msgs" class="mb-2 msg" [ngClass]="{'bg-primary myMsg': msg.name == 'Én'}">
+    <div class="card-block p-3">
+      <h6 class="card-subtitle mb-2 text-muted" *ngIf="msg.name != 'Én'">{{msg.name}}</h6>
+      {{msg.msg}}
+    </div>
+  </div>
+</div>
+<div id="input">
+  <div class="row">
+    <div class="col-9">
+      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter message..">
+    </div>
+    <div class="col-3">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-primary">Send</button>
+        <button type="button" class="btn btn-outline-primary">Send with image</button>
+      </div>
+    </div>
+  </div>
+</div>

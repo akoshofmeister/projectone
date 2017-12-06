@@ -1,15 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router'
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {RoomComponent} from './room/room.component';
+
+export const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: 'room/global',
+    pathMatch: 'full'
+  },
+  { path: 'room/:id', component: RoomComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RoomComponent
   ],
   imports: [
     CommonModule,
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

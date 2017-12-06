@@ -1,0 +1,40 @@
+.msg {
+  width: 40%;
+  background-color: white;
+  transition: width 0.5s;
+}
+
+.msg.myMsg {
+  margin-left: calc(60% - 22.5px);
+}
+
+.content {
+  float: left;
+  height: calc(100% - 47px);
+  width: calc( 100% - 22.5px);
+  max-width: calc( 100% - 22.5px);
+  z-index: 100;
+  position: fixed;
+  margin-left: 22.5px;
+  overflow: auto;
+}
+
+#input {
+  position: fixed;
+  bottom: 0;
+  margin-left: 17.5px;
+  width: calc( 100% - 17.5px);
+  max-width: calc( 100% - 17.5px);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.navVisible ~ #room {
+  margin-left: calc(15vw + 22.5px);
+  width: calc( 85vw - 22.5px );
+}
+
+.navVisible ~ #input {
+  margin-left: calc(15vw + 5px);
+  width: calc( 85vw - 5px );
+}

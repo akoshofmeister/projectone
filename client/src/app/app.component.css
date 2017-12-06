@@ -11,58 +11,17 @@ div#sideNav {
   margin-left: calc(-1*25vw);
 }
 
-div.msg {
-  width: 40%;
-  background-color: white;
-  transition: width 0.5s;
-}
-
-div.msg.myMsg {
-  margin-left: calc(60% - 22.5px);
-}
-
-div.content {
-  float: left;
-  height: calc(100% - 47px);
-  width: calc( 100% - 22.5px);
-  max-width: calc( 100% - 22.5px);
-  z-index: 100;
-  position: fixed;
-  margin-left: 22.5px;
-  overflow: auto;
-}
-
 #sideContent {
   max-width: calc(15vw - 15px);
   margin: 0;
   padding:0;
 }
 
-div.navVisible {
+.navVisible {
   margin-left: 0 !important;
 }
 
-div#input {
-  position: fixed;
-  bottom: 0;
-  margin-left: 17.5px;
-  width: calc( 100% - 17.5px);
-  max-width: calc( 100% - 17.5px);
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-div.navVisible ~ div#room {
-  margin-left: calc(15vw + 22.5px);
-  width: calc( 85vw - 22.5px );
-}
-
-div.navVisible ~ div#input {
-  margin-left: calc(15vw + 5px);
-  width: calc( 85vw - 5px );
-}
-
-div.toggler {
+.toggler {
   height: 75px;
   width: 50px;
   margin: calc(50vh - 37.5px) 0 0 0;
@@ -70,14 +29,14 @@ div.toggler {
   cursor: pointer;
 }
 
-div#togglerFirst {
+#togglerFirst {
   margin-left: -35px;
   border-top-right-radius: 200px;
   border-bottom-right-radius: 200px;
   position: fixed;
 }
 
-div#togglerSecond {
+#togglerSecond {
   margin-left: calc(15vw - 15px);
   position: fixed;
   border-top-left-radius: 200px;
@@ -86,13 +45,9 @@ div#togglerSecond {
   z-index: 10;
 }
 
-div#togglerFirst.hidden {
+#togglerFirst.hidden {
   margin-left: -50px;
 }
-div#togglerSecond.hidden {
+#togglerSecond.hidden {
   margin-left: calc(15vw + 50px);
-}
-
-div#togglerFirst.notif {
-  margin-left: -25px;
 }
