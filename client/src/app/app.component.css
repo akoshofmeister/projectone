@@ -1,24 +1,29 @@
-div {
-  transition: margin 0.5s;
-}
-
-div#sideNav {
-  float: left;
-  width: 15vw;
+#sideNav {
   height: 100vh;
   overflow: hidden;
-  position: fixed;
-  margin-left: calc(-1*25vw);
+  position: relative;
+  transition: width 0.5s;
 }
 
 #sideContent {
-  max-width: calc(15vw - 15px);
+  width: 30px;
+  height: 100%;
   margin: 0;
   padding:0;
+  float: left;
 }
 
-.navVisible {
-  margin-left: 0 !important;
+#sideContent > div {
+  padding: 5px;
+  transition: margin 0.75s;
+}
+
+#sideNav.hiddenNav > #sideContent > div {
+  margin-left: -35vw;
+}
+
+#sideNav.hiddenNav {
+  width: 0 !important;
 }
 
 .toggler {
@@ -27,27 +32,30 @@ div#sideNav {
   margin: calc(50vh - 37.5px) 0 0 0;
   z-index: 1000;
   cursor: pointer;
+  transition: margin 0.5s;
 }
 
 #togglerFirst {
   margin-left: -35px;
   border-top-right-radius: 200px;
   border-bottom-right-radius: 200px;
-  position: fixed;
+  position: absolute;
 }
 
 #togglerSecond {
-  margin-left: calc(15vw - 15px);
-  position: fixed;
+  margin-left: calc(100% - 15px);
   border-top-left-radius: 200px;
   border-bottom-left-radius: 200px;
   padding: 0;
   z-index: 10;
+  float: left;
+  position: absolute;
 }
 
 #togglerFirst.hidden {
   margin-left: -50px;
 }
+
 #togglerSecond.hidden {
-  margin-left: calc(15vw + 50px);
+  margin-left: 100%;
 }

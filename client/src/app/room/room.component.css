@@ -1,40 +1,32 @@
 .msg {
   width: 40%;
+  min-width: 250px;
   background-color: white;
-  transition: width 0.5s;
 }
 
 .msg.myMsg {
-  margin-left: calc(60% - 22.5px);
+  margin-left: 60%;
+  background-color: rgb(227,212,209);
 }
 
-.content {
-  float: left;
-  height: calc(100% - 47px);
-  width: calc( 100% - 22.5px);
-  max-width: calc( 100% - 22.5px);
-  z-index: 100;
-  position: fixed;
-  margin-left: 22.5px;
+.roomTitle {
+  height: 60px;
+}
+
+#content {
   overflow: auto;
+  height: calc(100vh - 120px);
+}
+
+#room {
+  overflow:hidden;
+  height: 100vh;
+  max-height: 100vh;
+  z-index: 1000;
 }
 
 #input {
-  position: fixed;
-  bottom: 0;
-  margin-left: 17.5px;
-  width: calc( 100% - 17.5px);
-  max-width: calc( 100% - 17.5px);
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.navVisible ~ #room {
-  margin-left: calc(15vw + 22.5px);
-  width: calc( 85vw - 22.5px );
-}
-
-.navVisible ~ #input {
-  margin-left: calc(15vw + 5px);
-  width: calc( 85vw - 5px );
+  height: 60px;
+  width: 100%;
+  background-color: #f9f9f9;
 }

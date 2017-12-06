@@ -6,18 +6,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isCollapsed= false;
-  togglerFirstHidden= false;
-  togglerSecondHidden= true;
-
-  ngOnInit() {
+  navVisible = true;
+  ngAfterContentInit() {
     document.getElementById("sideNav").addEventListener("transitionend", (event) => {
-      this.togglerFirstHidden = this.isCollapsed;
-      this.togglerSecondHidden = !this.isCollapsed;
+      if (this.navVisible) {
+        document.getElementById("togglerSecond").classList.remove("hidden");
+      } else {
+        document.getElementById("togglerFirst").classList.remove("hidden");
+      }
     }, false);
   }
 
   toggle() {
-    this.isCollapsed = !this.isCollapsed;
+    if (!this.navVisible) {
+      document.getElementById("togglerFirst").classList.add("hidden");
+    } else {
+      document.getElementById("togglerSecond").classList.add("hidden");
+    }
+    this.navVisible = !this.navVisible;
   }
 }

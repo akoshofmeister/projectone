@@ -1,16 +1,15 @@
-<div class="container-fluid">
-  <div class="row">
-    <div id="sideNav" class=" bg-danger" [ngClass]="{'navVisible': isCollapsed}">
-      <div id="sideContent">
-        {{message}}
-      </div>
+<div class="d-flex flex-row">
+  <div id="sideNav" class="w-25" style="background-color: rgb(194, 167, 161)" [ngClass]="{'hiddenNav': !navVisible}">
+    <div id="sideContent">
+      <div>egy</div>
+      <div>kettő</div>
+      <div>háromháromháromháromhárom</div>
+      <div>négy</div>
     </div>
-    <div id="togglerSecond" class="toggler" style="background-color: #f7f7f7;" (click)="toggle()"
-         [ngClass]="{'hidden': togglerSecondHidden}"></div>
-    <div id="togglerFirst" class="toggler bg-danger" (click)="toggle()"
-         [ngClass]="{'hidden': togglerFirstHidden}"></div>
-    <div class="app-content">
-      <router-outlet></router-outlet>
-    </div>
+    <div id="togglerSecond" class="toggler" style="background-color: #f7f7f7;" (click)="toggle()"></div>
+  </div>
+  <div id="togglerFirst" class="toggler hidden" style="background-color: rgb(194, 167, 161)" (click)="toggle()" ></div>  
+  <div class="app-content w-100">
+    <router-outlet></router-outlet>
   </div>
 </div>
