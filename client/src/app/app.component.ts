@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  userService: UserService = null;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
+  }
+
+  isLoggedIn() {
+    return this.userService.isLoggedIn;
+  }
+
   navVisible = true;
   ngAfterContentInit() {
     document.getElementById("sideNav").addEventListener("transitionend", (event) => {

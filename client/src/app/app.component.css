@@ -6,20 +6,18 @@
 }
 
 #sideContent {
-  width: 30px;
   height: 100%;
   margin: 0;
-  padding:0;
+  padding: 0;
   float: left;
 }
 
-#sideContent > div {
-  padding: 5px;
+#sideContent > .side-animate {
   transition: margin 0.75s;
 }
 
-#sideNav.hiddenNav > #sideContent > div {
-  margin-left: -35vw;
+#sideNav.hiddenNav > #sideContent > .side-animate {
+  margin-left: -30vw;
 }
 
 #sideNav.hiddenNav {

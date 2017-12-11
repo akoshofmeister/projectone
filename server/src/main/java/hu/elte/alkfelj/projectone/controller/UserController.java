@@ -1,38 +1,56 @@
 package hu.elte.alkfelj.projectone.controller;
 
-import hu.elte.alkfelj.projectone.entity.ApplicationUser;
-import hu.elte.alkfelj.projectone.repository.ApplicationUserRepository;
+import hu.elte.alkfelj.projectone.entity.User;
+import hu.elte.alkfelj.projectone.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import hu.elte.alkfelj.projectone.service.annotations.Role;
+import hu.elte.alkfelj.projectone.service.exceptions.UserNotValidException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import static hu.elte.alkfelj.projectone.entity.User.Role.ADMIN;
+import static hu.elte.alkfelj.projectone.entity.User.Role.GUEST;
+import static hu.elte.alkfelj.projectone.entity.User.Role.USER;
 
 @RestController
+@RequestMapping("/api/users")
 public class UserController {
 
-    private ApplicationUserRepository applicationUserRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserService userService;
 
-    public UserController(ApplicationUserRepository applicationUserRepository,
-                          BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.applicationUserRepository = applicationUserRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<ApplicationUser> register(@RequestBody ApplicationUser user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        if(applicationUserRepository.findByUsername(user.getUsername()) == null) {
-            applicationUserRepository.save(user);
-            return ResponseEntity.ok(applicationUserRepository.findByUsername(user.getUsername()));
-        } else {
+    @Role({USER, ADMIN})
+    @GetMapping
+    public ResponseEntity<User> user() {
+        if (userService.isLoggedIn()) {
+            return ResponseEntity.ok(userService.getUser());
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @Role({GUEST})
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok(userService.login(user));
+        } catch (UserNotValidException e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity logout(@RequestBody User user) {
+        this.userService.setUser(null);
+        return ResponseEntity.ok().build();
+    }
+
+    @Role({GUEST})
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody User user) {
+        return ResponseEntity.ok(userService.register(user));
     }
 }

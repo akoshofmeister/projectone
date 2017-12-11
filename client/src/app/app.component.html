@@ -1,14 +1,17 @@
 <div class="d-flex flex-row">
   <div id="sideNav" class="w-25" style="background-color: rgb(194, 167, 161)" [ngClass]="{'hiddenNav': !navVisible}">
-    <div id="sideContent">
-      <div>egy</div>
-      <div>kettő</div>
-      <div>háromháromháromháromhárom</div>
-      <div>négy</div>
-    </div>
     <div id="togglerSecond" class="toggler" style="background-color: #f7f7f7;" (click)="toggle()"></div>
+    <div id="sideContent w-100">
+      <div class="login-wrapper h-100 side-animate" *ngIf="!isLoggedIn()">
+        <login-form></login-form>
+      </div>
+      <nav class="side-animate" *ngIf="isLoggedIn()">
+        <app-menu></app-menu>
+      </nav>
+    </div>
   </div>
-  <div id="togglerFirst" class="toggler hidden" style="background-color: rgb(194, 167, 161)" (click)="toggle()" ></div>  
+  <div id="togglerFirst" class="toggler hidden" style="background-color: rgb(194, 167, 161)" (click)="toggle()" ></div>
+
   <div class="app-content w-100">
     <router-outlet></router-outlet>
   </div>

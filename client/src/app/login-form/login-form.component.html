@@ -1,0 +1,35 @@
+<div class="login-form-container h-100 d-flex flex-column justify-content-center">
+  <div class="alert alert-warning ml-3 mr-3 mt-5" *ngIf="!showRegister">
+    You need to login before using the application!
+  </div>
+  <div class="p-3" *ngIf="!showRegister">
+    <form class="login-form" [formGroup]="loginForm">
+      <h2 class="text-center mb-3">Login</h2>
+      <div class="form-group">
+        <input type="text" formControlName="username" required class="form-control form-control-lg mb-2" id="login-username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" formControlName="password" required class="form-control form-control-lg mb-2" id="login-password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)="login()"><span>Log in</span></button>
+    </form>
+    <div class="d-flex justify-content-center mt-2">
+      <button class="btn btn-secondary" (click)="toggleRegister()"><span>Register</span></button>
+    </div>
+  </div>
+  <div class="p-3" *ngIf="showRegister">
+    <form class="register-form" [formGroup]="registerForm">
+      <h2 class="text-center mb-3">Register</h2>
+      <div class="form-group">
+        <input type="text" required formControlName="username" class="form-control form-control-lg mb-2" id="login-username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <input type="password" required formControlName="password" class="form-control form-control-lg mb-2" id="login-password" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)="register()"><span>Register</span></button>
+    </form>
+    <div class="d-flex justify-content-center mt-2">
+      <button class="btn btn-secondary" (click)="toggleRegister()"><span>Login</span></button>
+    </div>
+  </div>
+</div>
