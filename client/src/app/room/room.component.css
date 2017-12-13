@@ -1,0 +1,32 @@
+.msg {
+  width: 40%;
+  min-width: 250px;
+  background-color: white;
+}
+
+.msg.myMsg {
+  margin-left: 60%;
+  background-color: rgb(227,212,209);
+}
+
+.roomTitle {
+  height: 60px;
+}
+
+#content {
+  overflow: auto;
+  height: calc(100vh - 120px);
+}
+
+#room {
+  overflow:hidden;
+  height: 100vh;
+  max-height: 100vh;
+  z-index: 1000;
+}
+
+#input {
+  height: 60px;
+  width: 100%;
+  background-color: #f9f9f9;
+}
