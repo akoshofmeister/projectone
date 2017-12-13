@@ -12,11 +12,15 @@
   float: left;
 }
 
-#sideContent > .side-animate {
+#sideContent{
   transition: margin 0.75s;
 }
 
-#sideNav.hiddenNav > #sideContent > .side-animate {
+#sideNav > #sideContent {
+  background-color: red;
+}
+
+#sideNav.hiddenNav > #sideContent {
   margin-left: -30vw;
 }
 
