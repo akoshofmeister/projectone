@@ -8,10 +8,11 @@ import {Router} from "@angular/router";
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-
+  private username: string = 'unknown';
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
+    this.username = this.userService.getUsername();
   }
 
   logout() {

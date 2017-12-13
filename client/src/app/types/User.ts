@@ -1,15 +1,15 @@
 export class Role {
-  static GUEST: String = "GUEST";
-  static USER: String = "USER";
-  static ADMIN: String = "ADMIN";
+  static GUEST: string = "GUEST";
+  static USER: string = "USER";
+  static ADMIN: string = "ADMIN";
 }
 
 export class User {
-  username: String;
-  password: String;
-  role: String;
+  username: string;
+  password: string;
+  role: string;
 
-  constructor(username?: String, password?: String, email?: String, role?: String) {
+  constructor(username?: string, password?: string, email?: string, role?: string) {
     this.username = username || "";
     this.password = password || "";
     this.role = role || Role.GUEST;

@@ -37,4 +37,8 @@ export class UserService {
         this.isLoggedIn = false;
       })
   }
+
+  getUsername() {
+    return this.currentUser.username;
+  }
 }
