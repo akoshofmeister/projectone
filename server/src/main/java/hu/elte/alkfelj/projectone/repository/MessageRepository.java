@@ -10,4 +10,5 @@ import java.util.Optional;
 @Repository
 public interface MessageRepository extends CrudRepository<Message, Integer> {
     Optional<List<Message>> findByRoomId(int roomId);
+    Optional<Message> findById(int id);
 }

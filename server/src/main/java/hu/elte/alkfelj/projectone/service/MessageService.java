@@ -19,9 +19,25 @@ public class MessageService {
     @Autowired
     private MessageRepository msgRepository;
 
+    @Autowired
+    private UserService userService;
+
     private Message msg;
 
     public List<Message> getMessagesByRoomId(int roomId) {
         return msgRepository.findByRoomId(roomId).get();
+    }
+
+    public Message getMessageById(int id) {
+        return msgRepository.findById(id).get();
+    }
+
+    public Message addMessage(Message message) {
+        message.setSenderId(userService.getUser().getId());
+        return msgRepository.save(message);
+    }
+
+    public void deleteMessage(Message message) {
+        msgRepository.delete(message);
     }
 }
