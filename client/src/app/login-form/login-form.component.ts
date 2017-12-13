@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../services/user.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {User} from "../types/user";
+import {User} from "../types/User";
 
 @Component({
   selector: 'login-form',
