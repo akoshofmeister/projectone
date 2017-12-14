@@ -1,7 +1,10 @@
 export class Routes {
-  static LOGIN: String = 'users/login';
-  static REGISTER: String = 'users/register';
-  static LOGOUT: String = 'users/logout';
+  static LOGIN: string = 'users/login';
+  static REGISTER: string = 'users/register';
+  static LOGOUT: string = 'users/logout';
+  static ROOMS: string = 'rooms';
+  static MESSAGES: string = 'messages';
+  static USERS: string = 'users';
 }
 
 export class ServerRoutes {

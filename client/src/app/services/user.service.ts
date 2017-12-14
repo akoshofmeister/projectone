@@ -41,4 +41,15 @@ export class UserService {
   getUsername() {
     return this.currentUser.username;
   }
+
+  getUserId() {
+    return this.currentUser ? this.currentUser.id : -1;
+  }
+
+  getUserById(id: number) {
+    return this.http.get(`${ServerRoutes.routeTo(Routes.USERS)}/${id}`)
+      .map(res =>
+        res.json()
+      )
+  }
 }

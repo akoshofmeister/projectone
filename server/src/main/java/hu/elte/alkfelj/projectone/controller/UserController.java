@@ -24,12 +24,17 @@ public class UserController {
     }
 
     @Role({USER, ADMIN})
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<User> user() {
         if (userService.isLoggedIn()) {
             return ResponseEntity.ok(userService.getUser());
         }
         return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> userById(@PathVariable("id") int userId) {
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 
     @Role({GUEST})

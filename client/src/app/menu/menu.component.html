@@ -1,8 +1,11 @@
 <div class="app-menu">
   <h3 class="p-2">Logged in as: {{username}}</h3>
   <ul class="p-2 d-flex flex-column list-unstyled">
-    <li class="menu-item">
+    <li class="menu-item mb-2">
       <button class="btn btn-block" (click)="logout()">Logout</button>
+    </li>
+    <li class="menu-item mb-2">
+      <button class="btn btn-block" routerLink="/newroom">New room</button>
     </li>
   </ul>
 </div>

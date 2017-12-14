@@ -4,6 +4,7 @@ import hu.elte.alkfelj.projectone.entity.Message;
 import hu.elte.alkfelj.projectone.entity.Room;
 import hu.elte.alkfelj.projectone.entity.User;
 import hu.elte.alkfelj.projectone.service.MessageService;
+import hu.elte.alkfelj.projectone.service.RoomMemberService;
 import hu.elte.alkfelj.projectone.service.RoomService;
 import hu.elte.alkfelj.projectone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,28 @@ public class MessageController {
     private final MessageService messageService;
     private final RoomService roomService;
     private final UserService userService;
+    private final RoomMemberService roomMemberService;
 
     @Autowired
-    public MessageController(MessageService messageService, RoomService roomService, UserService userService) {
+    public MessageController(MessageService messageService, RoomService roomService, UserService userService, RoomMemberService roomMemberService) {
         this.messageService = messageService;
         this.roomService = roomService;
         this.userService = userService;
+        this.roomMemberService = roomMemberService;
     }
 
-    @Role({USER, ADMIN})
+    @Role({USER, ADMIN, GUEST})
     @GetMapping()
     public ResponseEntity<List<Message>> getMessages(@RequestParam("roomid") int roomId) {
-        return ResponseEntity.ok(messageService.getMessagesByRoomId(roomId));
+        User user = userService.getUser();
+        Room room = roomService.getRoomById(roomId);
+        if(room.getOwnerId() == user.getId() || user.getRole().equals(User.Role.ADMIN) ||
+                (this.userService.getUser().getRole().equals(User.Role.GUEST) && roomId == 0) ||
+                this.roomMemberService.userIsMemberOfRoom(user, room))
+        {
+            return ResponseEntity.ok(messageService.getMessagesByRoomId(roomId));
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @Role({USER, ADMIN})

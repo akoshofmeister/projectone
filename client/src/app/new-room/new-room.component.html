@@ -1,0 +1,12 @@
+<div class="new-room h-100 d-flex justify-content-center flex-column p-5">
+  <div class="new-room-form-container">
+    <form class="new-room-form" [formGroup]="newRoomForm">
+      <h2 class="text-center mb-3">New room</h2>
+      <div class="form-group">
+        <input type="text" formControlName="name" required class="form-control form-control-lg mb-2" id="new-room-name"
+               placeholder="Name">
+      </div>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)="newroom()"><span>Log in</span></button>
+    </form>
+  </div>
+</div>

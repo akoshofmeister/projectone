@@ -1,28 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {RoomService} from "../services/room.service";
+import {MessagesService} from "../services/messages.service";
+import {Room} from "../types/Room";
+import {User} from "../types/User";
+import {UserService} from "../services/user.service";
+import {Message} from "../types/Message";
 
 @Component({
-  selector: 'app-room',
+  selector: 'room',
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
 export class RoomComponent implements OnInit {
-  message= 'Project one';
+  msgs: Message[] = [];
+  userId: number;
+  roomId: number;
+  room: Room;
+  currentMessage: string;
 
-  msgs= [
-    {name:"Máté", msg: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Én", msg: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Máté", msg: "icia deserunt mollit anim id est laborum."},
-    {name:"Én", msg: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Máté", msg: "óllum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Almafa", msg: "ident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Én", msg: "e irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Máté", msg: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
-    {name:"Máté", msg: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-  ];
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private activatedRoute: ActivatedRoute,
+              private userService: UserService,
+              private roomService: RoomService,
+              private messagesService: MessagesService) {
   }
 
+  ngOnInit() {
+    this.userId = this.userService.getUserId();
+    this.activatedRoute.params.subscribe(params => {
+      this.roomId = params['id'];
+      this.roomService.getById(this.roomId).subscribe((res) => {
+        this.room = res;
+      })
+    });
+    this.updateMessages();
+  }
+
+  updateMessages() {
+    this.messagesService.getRoomMessages(this.roomId).subscribe((res) => {
+      this.msgs = res;
+    });
+  }
+
+  sendMessage() {
+    this.messagesService.add({
+      content: this.currentMessage,
+      timestamp: null,
+      roomId: this.roomId
+    }).subscribe(() => {
+      this.updateMessages();
+    });
+    this.currentMessage = "";
+  }
 }
