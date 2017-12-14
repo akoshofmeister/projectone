@@ -8,4 +8,10 @@
       <button class="btn btn-block" routerLink="/newroom">New room</button>
     </li>
   </ul>
+  <h3>Rooms:</h3>
+  <ul class="p-2 d-flex flex-column list-unstyled">
+    <li *ngFor="let roommember of rooms" class="menu-item mb-2">
+      <button class="btn btn-block" routerLink="/room/{{roommember.roomId}}">{{roommember.name}}</button>
+    </li>
+  </ul>
 </div>

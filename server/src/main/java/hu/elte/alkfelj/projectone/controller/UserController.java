@@ -23,13 +23,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Role({USER, ADMIN})
+    @Role({USER, ADMIN, GUEST})
     @GetMapping()
     public ResponseEntity<User> user() {
-        if (userService.isLoggedIn()) {
-            return ResponseEntity.ok(userService.getUser());
-        }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(userService.getUser());
     }
 
     @GetMapping("/{id}")
@@ -48,9 +45,9 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity logout(@RequestBody User user) {
-        this.userService.setUser(null);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<User> logout(@RequestBody User user) {
+        this.userService.setUser(this.userService.defaultUser);
+        return ResponseEntity.ok(this.userService.defaultUser);
     }
 
     @Role({GUEST})

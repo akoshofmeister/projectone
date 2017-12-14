@@ -16,12 +16,11 @@ import static hu.elte.alkfelj.projectone.entity.User.Role.USER;
 @SessionScope
 @Data
 public class UserService {
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private RoomMemberRepository roomMemberRepository;
 
     private User user;
+    public User defaultUser;
 
     public User login(User user) throws UserNotValidException {
         if (isValid(user)) {
@@ -38,10 +37,14 @@ public class UserService {
         return user;
     }
 
-    public UserService() {
-        User user = new User();
+    @Autowired
+    public UserService(UserRepository userRepository, RoomMemberRepository roomMemberRepository) {
+        this.userRepository = userRepository;
+        this.roomMemberRepository = roomMemberRepository;
+        User user = new User("guest", "guest", User.Role.GUEST);
         user.setRole(User.Role.GUEST);
-        this.user = user;
+        this.defaultUser = this.userRepository.save(user);
+        this.user = this.defaultUser;
     }
 
     public boolean isValid(User user) {

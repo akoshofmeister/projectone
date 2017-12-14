@@ -1,6 +1,7 @@
 package hu.elte.alkfelj.projectone.service;
 
 import hu.elte.alkfelj.projectone.entity.Message;
+import hu.elte.alkfelj.projectone.entity.User;
 import hu.elte.alkfelj.projectone.repository.MessageRepository;
 import hu.elte.alkfelj.projectone.service.exceptions.UserNotValidException;
 import lombok.Data;
@@ -33,7 +34,11 @@ public class MessageService {
     }
 
     public Message addMessage(Message message) {
-        message.setSenderId(userService.getUser().getId());
+        if(userService.getUser().getRole().equals(User.Role.GUEST)){
+            message.setSenderId(userService.getDefaultUser().getId());
+        } else {
+            message.setSenderId(userService.getUser().getId());
+        }
         return msgRepository.save(message);
     }
 

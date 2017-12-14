@@ -10,6 +10,12 @@ export class UserService {
   isLoggedIn: boolean;
 
   constructor(private http: Http) {
+     this.http.get(ServerRoutes.routeTo(Routes.USERS))
+      .map(res =>{
+          this.currentUser = res.json();
+          console.log(this.currentUser);
+        }
+      );
   }
 
   login(user: User) {
@@ -31,9 +37,9 @@ export class UserService {
   }
 
   logout() {
-    return this.http.post(ServerRoutes.routeTo(Routes.LOGOUT), {})
+    return this.http.post(ServerRoutes.routeTo(Routes.LOGOUT), this.currentUser)
       .map(res => {
-        this.currentUser = new User();
+        this.currentUser = res.json();
         this.isLoggedIn = false;
       })
   }

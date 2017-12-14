@@ -64,9 +64,12 @@ public class MessageController {
         }
     }
 
-    @Role({USER, ADMIN})
+    @Role({USER, ADMIN, GUEST})
     @PostMapping()
     public ResponseEntity<Message> postMessage(@RequestBody Message message) {
-        return ResponseEntity.ok(messageService.addMessage(message));
+        if(!this.userService.getUser().getRole().equals(User.Role.GUEST) || message.getRoomId() == 0){
+            return ResponseEntity.ok(messageService.addMessage(message));
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 }
